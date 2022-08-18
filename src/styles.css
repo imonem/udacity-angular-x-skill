@@ -1,0 +1,71 @@
+/* Add application styles & imports to this file! */
+.list-container {
+  display: flex;
+}
+
+/* .list-container > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.list-container > ul > li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+} */
+.product-list {
+  flex-wrap: wrap;
+}
+
+li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  text-decoration-line: none;
+  border: hidden;
+}
+li:hover {
+  border: 3px;
+  border-color: black;
+}
+
+.product-name-title {
+  font-weight: 600;
+  font-size: larger;
+}
+
+.product-description {
+  font-weight: 400;
+  font-size: large;
+}
+
+.product-price {
+  font-weight: 400;
+  font-size: large;
+}
+
+.product {
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #808080;
+}
+
+/* visited link */
+a:visited {
+  color: #808080;
+}
+
+/* mouse over link */
+a:hover {
+  color: #808080;
+}
+
+/* selected link */
+a:active {
+  color: #808080;
+}

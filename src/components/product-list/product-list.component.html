@@ -1,0 +1,9 @@
+<div class="list-container" *ngFor="let product of products">
+  <ul >
+    <product 
+      [product]="product"
+      (addEvent)="addToCart($event)"
+      (removeEvent)="removeFromCart($event)"
+    ></product>
+  </ul>
+</div>

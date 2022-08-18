@@ -1,0 +1,23 @@
+<li class="product-card">
+  <div  *ngIf="product">
+    <a>
+      <img
+        src="{{ product.url }}"
+        width="200px"
+        alt="{{ product.name }} {{ product.description }}"
+      />
+      <br />
+      <span class="product-name-title">
+      {{ product.name }}
+    </span>
+      <br />
+      <strong>{{ product.price | currency: 'EGP ' }}</strong>
+      <br />
+      {{ product.description }}
+      <br />
+    </a>
+    <button (click)="addToCart()">Buy now</button>
+    <!-- <button (click)="removeFromCart()">Remove</button> -->
+    <button routerLink="/product-details/{{ product.id }}">Details</button>
+  </div>
+</li>
