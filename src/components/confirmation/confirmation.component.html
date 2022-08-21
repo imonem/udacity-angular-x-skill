@@ -1,13 +1,29 @@
 <div>
-	<mat-card>
-		<p>
+	<mat-card class="success-card" color="accent">
+		<img
+			src="../../assets/314052-P92FC2-602.jpg"
+			alt="Thank You"
+			mat-card-image
+		/>
+		<p mat-card-title>
 			Thank you {{ orderDetails['name'] }} for your order of
 			{{ orderDetails['total'] | currency: 'EGP ' }}
 		</p>
+		<p mat-card-subtitle>Please allow 1-3 days for shipping</p>
+		<p mat-card-subtitle>We hope to see you again soon</p>
+		<a type="button" routerLink="/" mat-flat-button color="accent"
+			>Back to products</a
+		>
 	</mat-card>
-	<mat-card>
-		<p>Please allow 1-3 days for shipping</p>
-		<p>We hope to see you again soon</p>
-	</mat-card>
-	<a routerLink="/">Back to products</a>
+
+	<div class="attribution">
+		<p>
+			<a
+				mat-icon-button
+				color="primary"
+				href="https://www.freepik.com/vectors/thank-you-lettering"
+				>Thank you lettering vector created by freepik - www.freepik.com</a
+			>
+		</p>
+	</div>
 </div>

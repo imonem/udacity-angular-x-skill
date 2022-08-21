@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable } from '@angular/core';
+import { NotifierService } from 'angular-notifier-updated';
 import { BehaviorSubject } from 'rxjs';
 import { Customer } from 'src/models/customer';
 import { Product } from '../models/product';
@@ -13,16 +13,18 @@ export class CartService {
 	cartQty$ = this.cartItemsCount$.asObservable();
 	products: Product[];
 	orderDetails: Object = {};
-	MAT_SNA;
+
+	//Show styled non-blocking notfications instead of blocking alerts
+	private readonly notifier: NotifierService;
 
 	constructor(
 		private inventoryService: InventoryService,
-		private _snackbar: MatSnackBar,
+		private notifierService: NotifierService,
 	) {
 		this.inventoryService.populatedList$.subscribe((response) => {
-			// console.log(response);
 			this.products = response;
 		});
+		this.notifier = notifierService;
 	}
 
 	addToCart(product: Product) {
@@ -45,38 +47,7 @@ export class CartService {
 			}
 		}
 		this.getCartTotalQty();
-		// window.alert('product added');
-		// this._snackbar.open(`Added ${product.name} to cart`, 'x', {
-		// 	duration: 1000,
-		// });
-		// this._snackbar.dismiss();
-		console.log(this.products);
-		console.log(this.cartItems);
-	}
-
-	removeOneFromCart(product: Product) {
-		//Condition to decrease product cart quantity instead of removing element from cart array
-		if (this.cartItems.find((p) => p.id == product.id)) {
-			let index = this.products.indexOf(product);
-			this.products[index].stock++;
-			this.cartItems.find((product) => product.qty--);
-			this.cartTotal = this.getCartTotal();
-		} else {
-			if (this.products.find((i) => i.stock > 0 && i.id == product.id)) {
-				let index = this.products.indexOf(product);
-				this.products[index].stock++;
-				this.products[index].qty--;
-				this.cartItems.push(product);
-				this.cartTotal = this.getCartTotal();
-			}
-		}
-		this.getCartTotalQty();
-		// window.alert('product removed');
-		this._snackbar.open(`Removed ${product.name} to cart`, 'x', {
-			duration: 2500,
-		});
-		console.log(this.products);
-		console.log(this.cartItems);
+		this.notifier.notify('success', `Added ${product.name} to cart`);
 	}
 
 	deleteFromCart(product) {
@@ -91,8 +62,7 @@ export class CartService {
 		//Update cart total to reflect change
 		this.getCartTotalQty();
 		this.getCartTotal();
-		// window.alert('Removed from cart');
-		this._snackbar.open(`Removed all of the ${product.name} from cart`, 'x');
+		this.notifier.notify('warning', `Removed all ${product.name} from cart`);
 	}
 
 	getCartItems() {
@@ -113,18 +83,21 @@ export class CartService {
 		this.cartItems = [];
 		this.getCartTotalQty();
 		this.products.map((p) => (p.qty = 0));
+		this.notifier.notify('warning', `Cleared cart!!`);
 	}
 
+	//Setter for order details, that is shared with confirmation page
 	setOrderDetails(customer: Customer, cartTotal: number) {
 		this.orderDetails = { name: customer.name, total: cartTotal };
+		this.notifier.notify('success', `Success! Thanks for shopping with us!`);
 	}
 
+	//Getter for order details, that is shared with confirmation page
 	getOrderDetails() {
-		console.log(this.orderDetails);
 		return this.orderDetails;
 	}
 
-	//Get total item quantity in cart to reflect on the badge
+	//Get total item quantity in cart to reflect on the cart badge at nav bar
 	getCartTotalQty() {
 		let qty = 0;
 		for (const p of this.cartItems) {

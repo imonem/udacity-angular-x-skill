@@ -15,7 +15,6 @@ import { CartComponent } from '../components/cart/cart.component';
 import { ConfirmationComponent } from '../components/confirmation/confirmation.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from '../material.module';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
 	imports: [
@@ -36,11 +35,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 		CartComponent,
 		ConfirmationComponent,
 	],
-	providers: [
-		InventoryService,
-		CartService,
-		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000 } },
-	],
+	providers: [InventoryService, CartService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

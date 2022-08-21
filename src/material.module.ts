@@ -8,12 +8,51 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
-import {
-	MatSnackBarModule,
-	MAT_SNACK_BAR_DEFAULT_OPTIONS,
-} from '@angular/material/snack-bar';
+import { NotifierModule, NotifierOptions } from 'angular-notifier-updated';
+
+const customNotifierOptions: NotifierOptions = {
+	position: {
+		horizontal: {
+			position: 'left',
+			distance: 12,
+		},
+		vertical: {
+			position: 'bottom',
+			distance: 12,
+			gap: 10,
+		},
+	},
+	theme: 'material',
+	behaviour: {
+		autoHide: 5000,
+		onClick: 'hide',
+		onMouseover: 'pauseAutoHide',
+		showDismissButton: true,
+		stacking: 4,
+	},
+	animations: {
+		enabled: true,
+		show: {
+			preset: 'slide',
+			speed: 300,
+			easing: 'ease',
+		},
+		hide: {
+			preset: 'fade',
+			speed: 300,
+			easing: 'ease',
+			offset: 50,
+		},
+		shift: {
+			speed: 300,
+			easing: 'ease',
+		},
+		overlap: 150,
+	},
+};
 
 @NgModule({
+	imports: [NotifierModule.withConfig(customNotifierOptions)],
 	exports: [
 		MatBadgeModule,
 		MatButtonModule,
@@ -23,7 +62,7 @@ import {
 		MatIconModule,
 		FlexLayoutModule,
 		MatInputModule,
-		MatSnackBarModule,
+		NotifierModule,
 	],
 })
 export class MaterialModule {}

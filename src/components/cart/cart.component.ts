@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
-import { InventoryService } from 'src/services/inventory.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { CartService } from '../../services/cart.service';
 import { Customer } from '../../models/customer';
 import { ThemePalette } from '@angular/material/core';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-cart',
@@ -33,10 +31,6 @@ export class CartComponent implements OnInit {
 		return this.cartTotal;
 	}
 
-	removeOneFromCart(product) {
-		this.cartService.removeOneFromCart(product);
-	}
-
 	deleteFromCart(product) {
 		this.cartService.deleteFromCart(product);
 	}
@@ -49,15 +43,14 @@ export class CartComponent implements OnInit {
 		return;
 	}
 
+	//Check if a cart is empty and return to product screen
 	checkout() {
-		console.log(this.customer);
-		console.log(this.cartTotal);
 		if (this.inCart.length == 0) {
 			this.routerLink.navigate(['/']);
-			return window.alert('Your cart is empty');
+			return window.alert(`Your cart is empty!`);
 		}
 		if (this.customer.name == '' || this.customer.address == '') {
-			return window.alert('Please complete your information');
+			return window.alert(`Please fill in your details!`);
 		}
 		this.routerLink.navigate(['/order-confirmation']);
 		this.cartService.setOrderDetails(this.customer, this.cartTotal);

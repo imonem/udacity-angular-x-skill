@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { CartService } from '../../services/cart.service';
 import { InventoryService } from '../../services/inventory.service';
-import { ProductComponent } from '../product/product.component';
 
 @Component({
 	selector: 'product-list',
@@ -17,25 +14,15 @@ export class ProductListComponent implements OnInit {
 	constructor(
 		private inventoryService: InventoryService,
 		private cartService: CartService,
-		private router: Router,
 	) {
 		this.inventoryService.populatedList$.subscribe((response) => {
-			console.log(response);
 			this.products = response;
 		});
 	}
 
-	ngOnInit() {
-		// console.log(this.products);
-	}
+	ngOnInit() {}
 
 	addToCart(event) {
-		console.log(event);
 		this.cartService.addToCart(event);
-	}
-
-	removeOneFromCart(event) {
-		console.log(event);
-		this.cartService.removeOneFromCart(event);
 	}
 }

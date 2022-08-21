@@ -1,20 +1,22 @@
-<div class="product" *ngIf="product">
-	<h1>{{ product.name }}</h1>
+<mat-card *ngIf="product">
+	<h1 mat-card-title>{{ product.name }}</h1>
 	<a class="product">
 		<img
+			mat-card-xl-image
 			src="{{ product.url }}"
 			width="400px"
 			alt="{{ product.name }} {{ product.description }}"
 		/>
-		<br />
-		{{ product.name }}
-		<br />
-		{{ product.description }}
-		<br />
-		<strong>{{ product.price | currency: 'EGP ' }}</strong>
-		<br />
+		<span mat-card-content>
+			{{ product.description }}
+		</span>
+
+		<strong mat-card-content>{{ product.price | currency: 'EGP ' }}</strong>
 	</a>
-	<button type="button" routerLink="/">Back to products</button>
-	<button (click)="addToCart()">Buy now</button>
-</div>
-<router-outlet name="product-details"></router-outlet>
+	<a type="button" routerLink="/" mat-flat-button color="secondary">
+		Back to products
+	</a>
+	<button (click)="addToCart()" mat-raised-button color="primary">
+		Buy now
+	</button>
+</mat-card>

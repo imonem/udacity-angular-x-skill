@@ -20,7 +20,6 @@ const routes: Routes = [
 
 	{ path: 'cart', component: CartComponent },
 	{ path: 'order-confirmation', component: ConfirmationComponent },
-	{ path: 'order-confirmation', component: ConfirmationComponent },
 ];
 
 @NgModule({
