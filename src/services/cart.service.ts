@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NotifierService } from 'angular-notifier-updated';
 import { BehaviorSubject } from 'rxjs';
-import { Customer } from 'src/models/customer';
+import { Customer } from '../models/customer';
 import { Product } from '../models/product';
 import { InventoryService } from './inventory.service';
 
