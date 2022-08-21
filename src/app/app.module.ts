@@ -14,27 +14,33 @@ import { CartService } from '../services/cart.service';
 import { CartComponent } from '../components/cart/cart.component';
 import { ConfirmationComponent } from '../components/confirmation/confirmation.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from '../material.module';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-  ],
-  declarations: [
-    AppComponent,
-    ProductListComponent,
-    ProductComponent,
-    ProductDetailsComponent,
-    NavComponent,
-    FooterComponent,
-    CartComponent,
-    ConfirmationComponent,
-  ],
-  providers: [InventoryService, CartService],
-  bootstrap: [AppComponent],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		BrowserModule,
+		HttpClientModule,
+		AppRoutingModule,
+		MaterialModule,
+	],
+	declarations: [
+		AppComponent,
+		ProductListComponent,
+		ProductComponent,
+		ProductDetailsComponent,
+		NavComponent,
+		FooterComponent,
+		CartComponent,
+		ConfirmationComponent,
+	],
+	providers: [
+		InventoryService,
+		CartService,
+		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000 } },
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

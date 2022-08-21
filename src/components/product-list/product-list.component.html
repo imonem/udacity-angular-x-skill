@@ -1,9 +1,16 @@
-<div class="list-container" *ngFor="let product of products">
-  <ul >
-    <product 
-      [product]="product"
-      (addEvent)="addToCart($event)"
-      (removeEvent)="removeFromCart($event)"
-    ></product>
-  </ul>
-</div>
+<ul
+	class="product-list"
+	fxLayout="row"
+	fxLayout.lt-sm="column"
+	fxLayoutGap="5px"
+	style="max-width: fit-content"
+>
+	<div *ngFor="let product of products">
+		<product
+			mat-card-content
+			[product]="product"
+			(addEvent)="addToCart($event)"
+			(removeEvent)="removeOneFromCart($event)"
+		></product>
+	</div>
+</ul>

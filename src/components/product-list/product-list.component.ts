@@ -1,40 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { CartService } from '../../services/cart.service';
 import { InventoryService } from '../../services/inventory.service';
 import { ProductComponent } from '../product/product.component';
 
 @Component({
-  selector: 'product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
+	selector: 'product-list',
+	templateUrl: './product-list.component.html',
+	styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products: Product[];
+	products: Product[];
 
-  constructor(
-    private inventoryService: InventoryService,
-    private cartService: CartService,
-    private router: Router
-  ) {
-    this.inventoryService.populatedList$.subscribe((response) => {
-      console.log(response);
-      this.products = response;
-    });
-  }
+	constructor(
+		private inventoryService: InventoryService,
+		private cartService: CartService,
+		private router: Router,
+	) {
+		this.inventoryService.populatedList$.subscribe((response) => {
+			console.log(response);
+			this.products = response;
+		});
+	}
 
-  ngOnInit() {
-    // console.log(this.products);
-  }
+	ngOnInit() {
+		// console.log(this.products);
+	}
 
-  addToCart(event) {
-    console.log(event);
-    this.cartService.addToCart(event);
-  }
+	addToCart(event) {
+		console.log(event);
+		this.cartService.addToCart(event);
+	}
 
-  removeFromCart(event) {
-    console.log(event);
-    this.cartService.removeFromCart(event);
-  }
+	removeOneFromCart(event) {
+		console.log(event);
+		this.cartService.removeOneFromCart(event);
+	}
 }

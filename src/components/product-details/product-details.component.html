@@ -1,20 +1,20 @@
 <div class="product" *ngIf="product">
-  <h1>{{ product.name }}</h1>
-  <a class="product">
-    <img
-      src="{{ product.url }}"
-      width="400px"
-      alt="{{ product.name }} {{ product.description }}"
-    />
-    <br />
-    {{ product.name }}
-    <br />
-    {{ product.description }}
-    <br />
-    <strong>{{ product.price | currency: 'EGP ' }}</strong>
-    <br />
-  </a>
-  <button type="button" routerLink="/">Back to products</button>
-  <button (click)="addToCart()">Buy now</button>
+	<h1>{{ product.name }}</h1>
+	<a class="product">
+		<img
+			src="{{ product.url }}"
+			width="400px"
+			alt="{{ product.name }} {{ product.description }}"
+		/>
+		<br />
+		{{ product.name }}
+		<br />
+		{{ product.description }}
+		<br />
+		<strong>{{ product.price | currency: 'EGP ' }}</strong>
+		<br />
+	</a>
+	<button type="button" routerLink="/">Back to products</button>
+	<button (click)="addToCart()">Buy now</button>
 </div>
-<router-outlet></router-outlet>
+<router-outlet name="product-details"></router-outlet>

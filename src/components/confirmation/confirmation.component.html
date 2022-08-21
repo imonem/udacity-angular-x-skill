@@ -1,3 +1,13 @@
-<p>
-confirmation works!
-</p>
+<div>
+	<mat-card>
+		<p>
+			Thank you {{ orderDetails['name'] }} for your order of
+			{{ orderDetails['total'] | currency: 'EGP ' }}
+		</p>
+	</mat-card>
+	<mat-card>
+		<p>Please allow 1-3 days for shipping</p>
+		<p>We hope to see you again soon</p>
+	</mat-card>
+	<a routerLink="/">Back to products</a>
+</div>

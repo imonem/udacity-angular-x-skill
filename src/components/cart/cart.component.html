@@ -1,5 +1,98 @@
-<div *ngFor="let product of inCart">
-  <article>
-    <h3>{{ product.name }}</h3>
-  </article>
+<div class="container" fxLayout="row" fxLayoutAlign="space-around">
+	<div class="cart-container" *ngIf="inCart.length">
+		<h1>Products in bag</h1>
+		<mat-card
+			*ngFor="let product of inCart"
+			class="cart-list"
+			fxLayout="column"
+		>
+			<mat-card-content>
+				<span mat-card-title>{{ product.name }}</span>
+				<div>
+					<img
+						mat-card-avatar
+						src="{{ product.url }}"
+						alt="product-thumbnail"
+						[width]="75"
+						routerLink="/product-details/{{ product.id }}"
+						style="cursor: pointer"
+					/>
+				</div>
+				<mat-form-field appearance="outline" class="mat-form-field">
+					<input
+						matInput
+						type="number"
+						[(ngModel)]="product.qty"
+						(ngModelChange)="checkZero(product); getCartTotal()"
+						name="product.qty"
+					/>
+				</mat-form-field>
+				<mat-card-actions>
+					<button
+						mat-raised-button
+						color="accent"
+						(click)="deleteFromCart(product); getCartTotal()"
+					>
+						Remove
+					</button>
+				</mat-card-actions>
+				<span mat-card-subtitle>
+					{{ product.price * product.qty | currency: 'EGP ' }}
+				</span>
+			</mat-card-content>
+		</mat-card>
+		<div>
+			<h2>Cart Total</h2>
+			<article>
+				<h4>{{ cartTotal | currency: 'EGP ' }}</h4>
+			</article>
+		</div>
+	</div>
+	<div class="cart-container" *ngIf="inCart.length == 0">
+		<h1>Your cart is empty</h1>
+	</div>
+	<div class="customer-details" fxLayout="column">
+		<h1>Shipping and Billing Details</h1>
+		<mat-form-field appearance="outline" class="mat-form-field">
+			<mat-label>Your name</mat-label>
+			<input
+				matInput
+				minlength="5"
+				placeholder="Your name goes here"
+				type="text"
+				[(ngModel)]="customer.name"
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="outline" class="mat-form-field">
+			<mat-label>Address</mat-label>
+			<input
+				matInput
+				minlength="12"
+				placeholder="Enter your address"
+				type="text"
+				[(ngModel)]="customer.address"
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="outline" class="mat-form-field">
+			<mat-label>Credit Card</mat-label>
+			<input
+				matInput
+				maxlength="16"
+				type="numeric"
+				placeholder="Enter your credit card number here"
+				#credit_card
+				[(ngModel)]="customer.creditCard"
+			/><mat-hint align="end">16</mat-hint>
+		</mat-form-field>
+		<div>
+			<button
+				mat-raised-button
+				color="primary"
+				type="submit"
+				(click)="checkout()"
+			>
+				Checkout ({{ cartTotal | currency: 'EGP ' }})
+			</button>
+		</div>
+	</div>
 </div>

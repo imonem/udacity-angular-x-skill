@@ -1,10 +1,17 @@
-<nav class="menu-list">
-  <ul>
-    <a routerLink="/">
-      <li>Home</li>
-    </a>
-    <a routerLink="/cart">
-      <li>Cart</li>
-    </a>
-  </ul>
+<nav
+	class="menu-list"
+	fxLayout="row"
+	fxLayoutAlign="space-evenly"
+	style="max-width: 640px"
+>
+	<button mat-raised-button color="accent" routerLink="/">
+		<mat-icon fontIcon="home"></mat-icon>
+	</button>
+	<button mat-raised-button color="accent" routerLink="/cart">
+		<mat-icon
+			matBadge="{{ cartTotalBadge }}"
+			matBadgeHidden="{{ !cartTotalBadge }}"
+			fontIcon="shopping_cart"
+		></mat-icon>
+	</button>
 </nav>

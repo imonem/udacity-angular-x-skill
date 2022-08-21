@@ -1,12 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CartService } from 'src/services/cart.service';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
-  selector: 'anav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css'],
+	selector: 'anav',
+	templateUrl: './nav.component.html',
+	styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-  constructor() {}
+	@Input()
+	color: ThemePalette;
 
-  ngOnInit() {}
+	cartTotalBadge: number;
+	constructor(private cartService: CartService) {
+		this.cartService.cartQty$.subscribe((res) => {
+			this.cartTotalBadge = res;
+			console.log(res);
+		});
+	}
+
+	ngOnInit() {
+		console.log(this.cartTotalBadge);
+	}
 }
