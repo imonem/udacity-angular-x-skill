@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CartService } from 'src/services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
