@@ -5,6 +5,7 @@ import { Customer } from '../../models/customer';
 import { ThemePalette } from '@angular/material/core';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-cart',
@@ -18,12 +19,22 @@ export class CartComponent implements OnInit {
 	inInventory: Product[] = [];
 	cartTotal = 0;
 	customer: Customer = { name: '', address: '', creditCard: null };
+	formCustomerDetails: FormGroup;
 
-	constructor(private cartService: CartService, private routerLink: Router) {}
+	constructor(
+		private cartService: CartService,
+		private routerLink: Router,
+		private builder: FormBuilder,
+	) {}
 
 	ngOnInit() {
 		this.inCart = this.cartService.getCartItems();
 		this.cartTotal = this.cartService.getCartTotal();
+		this.formCustomerDetails = this.builder.group({
+			name: [null, Validators.required],
+			address: [null, Validators.required],
+			creditCard: [null, Validators.required],
+		});
 	}
 
 	getCartTotal() {

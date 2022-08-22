@@ -48,51 +48,59 @@
 			</article>
 		</div>
 	</div>
+
 	<div class="cart-container" *ngIf="inCart.length == 0">
 		<h1>Your cart is empty</h1>
 	</div>
+
 	<div class="customer-details" fxLayout="column">
 		<h1>Shipping and Billing Details</h1>
-		<mat-form-field appearance="outline" class="mat-form-field">
-			<mat-label>Your name</mat-label>
-			<input
-				matInput
-				minlength="5"
-				placeholder="Your name goes here"
-				type="text"
-				[(ngModel)]="customer.name"
-			/>
-		</mat-form-field>
-		<mat-form-field appearance="outline" class="mat-form-field">
-			<mat-label>Address</mat-label>
-			<input
-				matInput
-				minlength="12"
-				placeholder="Enter your address"
-				type="text"
-				[(ngModel)]="customer.address"
-			/>
-		</mat-form-field>
-		<mat-form-field appearance="outline" class="mat-form-field">
-			<mat-label>Credit Card</mat-label>
-			<input
-				matInput
-				maxlength="16"
-				type="numeric"
-				placeholder="Enter your credit card number here"
-				#credit_card
-				[(ngModel)]="customer.creditCard"
-			/><mat-hint align="end">16</mat-hint>
-		</mat-form-field>
-		<div>
-			<button
-				mat-raised-button
-				color="primary"
-				type="submit"
-				(click)="checkout()"
-			>
-				Checkout ({{ cartTotal | currency: 'EGP ' }})
-			</button>
-		</div>
+		<form [formGroup]="formCustomerDetails" fxLayout="column">
+			<mat-form-field appearance="outline" class="mat-form-field">
+				<mat-label>Your name</mat-label>
+				<input
+					formControlName="name"
+					matInput
+					minlength="5"
+					placeholder="Your name goes here"
+					type="text"
+					[(ngModel)]="customer.name"
+				/>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="mat-form-field">
+				<mat-label>Address</mat-label>
+				<input
+					formControlName="address"
+					matInput
+					minlength="12"
+					placeholder="Enter your address"
+					type="text"
+					[(ngModel)]="customer.address"
+				/>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="mat-form-field">
+				<mat-label>Credit Card</mat-label>
+				<input
+					formControlName="creditCard"
+					matInput
+					maxlength="16"
+					type="numeric"
+					placeholder="Enter your credit card number here"
+					#credit_card
+					[(ngModel)]="customer.creditCard"
+				/><mat-hint align="end">16</mat-hint>
+			</mat-form-field>
+			<div>
+				<button
+					mat-raised-button
+					color="primary"
+					type="submit"
+					(click)="checkout()"
+					[disabled]="formCustomerDetails.invalid"
+				>
+					Checkout ({{ cartTotal | currency: 'EGP ' }})
+				</button>
+			</div>
+		</form>
 	</div>
 </div>

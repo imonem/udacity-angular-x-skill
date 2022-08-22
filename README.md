@@ -5,7 +5,8 @@
 ----
 # Project Title
 
-Angular Cross Skilling EgFWD
+Angular Cross Skilling EgFWD, this is a project to show case skills in Angular Framework.
+It is an e-commerce store website, fetch the inventory products from a json file, checkout page with validation and a confirmation page.
 
 ## Getting Started
 
